@@ -1,0 +1,43 @@
+﻿@using Engrama.PWA.Areas.AI_Tools.Componets
+@inherits EngramaPage
+
+@page "/PageCodeByTables"
+
+<PageTitle>PageCodeByTables</PageTitle>
+
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h6">Code By Tables AI</MudText>
+		</CardHeaderContent>
+
+	</MudCardHeader>
+	<MudCardContent>
+
+
+		<MudGrid>
+			<MudItem sm="12">
+
+				<GridSelectTables DataBase="@Data.MainDataBase" EC_TablaSelected="EC_TablaSelected"></GridSelectTables>
+			</MudItem>
+			<MudItem sm="12">
+				@foreach (var item in Data.LstTablesSelected)
+				{
+					<MudChip T="string"
+							 Label="true"
+							 Color="Color.Info"
+							 OnClose="@(()=> CloseChip(item))">
+						@item.vchName
+					</MudChip>
+
+				}
+			</MudItem>
+			<MudItem sm="12">
+
+				<GridChat LstChatMessage="Data.LstCodeByIA" OnSendMessage="OnClickCrearCodigo"></GridChat>
+
+			</MudItem>
+		</MudGrid>
+	</MudCardContent>
+</MudCard>
+

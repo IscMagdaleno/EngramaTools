@@ -1,0 +1,57 @@
+﻿@page "/PageAdminCommonScript"
+@using Engrama.PWA.Areas.CommonScripts.Components
+@using Microsoft.AspNetCore.Authorization
+@using Engrama.PWA.Shared.Common
+@inherits EngramaPage
+
+@attribute [Authorize(Roles = "Admin")]
+
+<PageTitle>Códigos Rapidos</PageTitle>
+
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h6">Códigos Rapidos</MudText>
+		</CardHeaderContent>
+		<CardHeaderActions>
+			@if (bShowForm)
+			{
+				<MudFab Color="Color.Secondary"
+						StartIcon="@Icons.Material.Filled.ArrowBack"
+						Label="Volver"
+						OnClick="OnClickVolver" />
+
+			}
+			else
+			{
+				<MudFab Color="Color.Success"
+						StartIcon="@Icons.Material.Filled.Add"
+						Label="Add"
+						OnClick="OnClickAdd" />
+
+			}
+
+		</CardHeaderActions>
+	</MudCardHeader>
+	<MudCardContent>
+		<MudGrid>
+
+			<MudItem sm="12">
+				@if (bShowForm)
+				{
+					<FormCommonScript Data="@Data"
+									  OnScriptSaved="OnScriptSaved" />
+				}
+				else
+				{
+					<GridCommonScripts Data="@Data"
+									   bEnableEdit="true"
+									   OnEditSelected="OnEditSelected">
+					</GridCommonScripts>
+				}
+			</MudItem>
+
+		</MudGrid>
+
+	</MudCardContent>
+</MudCard>

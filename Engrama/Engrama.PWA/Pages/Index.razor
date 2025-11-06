@@ -1,0 +1,38 @@
+﻿@page "/"
+
+<PageTitle>Homme</PageTitle>
+
+<MudCard Style="background-color: #3737404f; text-align:center">
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h1" GutterBottom="true">Bienvenido a Engrama!</MudText>
+		</CardHeaderContent>
+	</MudCardHeader>
+	<MudCardContent>
+
+		<MudText Typo="Typo.h6">Desarrollo Simplificado, Resultados Impresionantes!</MudText>
+		<MudText>
+			Bienvenido a nuestra revolucionaria aplicación web para la creación de proyectos
+			de software de forma más sencilla y rápida.
+		</MudText>
+	</MudCardContent>
+	<MudCardActions Class="justify-center">
+		<MudGrid>
+			<MudItem sm="12">
+				<Home></Home>
+
+			</MudItem>
+		</MudGrid>
+
+
+	</MudCardActions>
+</MudCard>
+
+@inject NavigationManager NavigationManager
+
+@code {
+	private void NavigateToPages(string page)
+	{
+		NavigationManager.NavigateTo("/" + page);
+	}
+}

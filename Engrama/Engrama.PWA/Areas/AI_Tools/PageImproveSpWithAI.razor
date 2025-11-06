@@ -1,0 +1,99 @@
+﻿@using Engrama.PWA.Areas.AI_Tools.Componets
+@using Engrama.PWA.Areas.DataBase.Components
+@inherits EngramaPage
+
+@page "/PageImproveSpWithAI"
+
+<PageTitle>PageImproveSpWithAI</PageTitle>
+
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h6">Mejora procedimiento Almacenados con IA</MudText>
+		</CardHeaderContent>
+
+	</MudCardHeader>
+	<MudCardContent>
+
+
+		<MudGrid>
+			<MudItem sm="6">
+				<GridSelectProcedures DataBase="@Data.MainDataBase"
+									  EC_StoredProcedureSelected="EC_StoredProcedureSelected"
+									  OnConnectionSelected="OnConnectionSelected">
+				</GridSelectProcedures>
+			</MudItem>
+			@if (Data.MainDataBase.ConnectionStringSelected.vchConnectionString.NotEmpty())
+			{
+				<MudItem sm="6">
+
+					<MudGrid>
+						<MudItem sm="12">
+							<GridSelectTables DataBase="@Data.MainDataBase"
+											  EC_TablaSelected="EC_TablaSelected">
+							</GridSelectTables>
+						</MudItem>
+						<MudItem sm="12">
+							@foreach (var item in Data.LstTablesSelected)
+							{
+								<MudChip T="string"
+										 Label="true"
+										 Color="Color.Info"
+										 OnClose="@(()=> CloseChip(item))">
+									@item.vchName
+								</MudChip>
+
+							}
+						</MudItem>
+					</MudGrid>
+				</MudItem>
+			}
+
+			@if (Data.StoredProcedureSelected.idStoredProcedure > 0)
+			{
+				<MudItem sm="12">
+					<MudExpansionPanels MultiExpansion="true">
+						<MudExpansionPanel Text="Código del Procedimiento">
+
+							<MudTextField @bind-Value="@Data.StoredProcedureSelected.Details.Code"
+										  Label="Código"
+										  Lines="30"
+										  Variant="Variant.Outlined">
+							</MudTextField>
+
+
+						</MudExpansionPanel>
+						<MudExpansionPanel Text="Parámetros">
+							<MudGrid>
+
+								<MudItem sm="6">
+									<TableParameters Variables="@Data.StoredProcedureSelected.Details.InputParameters"
+													 Title="Input Parameters" />
+
+								</MudItem>
+								<MudItem sm="6">
+									<TableParameters Variables="@Data.StoredProcedureSelected.Details.OutputParameters"
+													 Title="Output Parameters" />
+								</MudItem>
+							</MudGrid>
+						</MudExpansionPanel>
+					</MudExpansionPanels>
+				</MudItem>
+
+
+
+				<MudItem sm="12">
+
+					<GridChat LstChatMessage="Data.LstCodeByIA"
+							  OnSendMessage="OnClickCrearCodigo">
+					</GridChat>
+
+				</MudItem>
+
+			}
+
+
+		</MudGrid>
+	</MudCardContent>
+</MudCard>
+

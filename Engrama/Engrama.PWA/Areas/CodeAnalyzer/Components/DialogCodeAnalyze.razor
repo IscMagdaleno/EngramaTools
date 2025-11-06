@@ -1,0 +1,18 @@
+﻿@using Engrama.PWA.Shared.Common
+@inherits EngramaComponent
+
+<MudDialog>
+	<TitleContent>
+		Code Analyzed
+	</TitleContent>
+	<DialogContent>
+
+		<BigCardCodeAnalyzed Code="@Code"></BigCardCodeAnalyzed>
+	</DialogContent>
+	<DialogActions>
+		<MudButton Color="Color.Primary"
+				   OnClick="Submit">
+			Cerrar
+		</MudButton>
+	</DialogActions>
+</MudDialog>

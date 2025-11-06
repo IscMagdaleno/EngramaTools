@@ -1,0 +1,43 @@
+﻿@using EngramaCoreStandar.Extensions;
+@using Engrama.PWA.Areas.DataBase.Components
+@using Engrama.PWA.Shared.Common
+@inherits EngramaPage
+@page "/PageConnectionsString"
+
+<PageTitle>Cadenas de conexión</PageTitle>
+
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h6">Cadenas de conexión</MudText>
+		</CardHeaderContent>
+		<CardHeaderActions>
+
+		</CardHeaderActions>
+	</MudCardHeader>
+	<MudCardContent>
+
+		<MudExpansionPanels  MultiExpansion="true">
+			<MudExpansionPanel Expanded="true"  Text="Fomulario" MaxHeight="1000">
+
+				<MudGrid>
+					<MudItem sm="12">
+						<FormConnectionString Data="@Data"
+											  OnConnectionSaved="OnConnectionSaved">
+						</FormConnectionString>
+					</MudItem>
+				</MudGrid>
+			</MudExpansionPanel>
+			<MudExpansionPanel Text="Tabla" Expanded="true" MaxHeight="1000">
+				<MudGrid>
+					<MudItem sm="12">
+						<TableConnectios Data="@Data" 
+							OnConnectionStringSelected="@OnConnectionStringSelected"></TableConnectios>
+					</MudItem>
+				</MudGrid>
+			</MudExpansionPanel>
+
+		</MudExpansionPanels>
+
+	</MudCardContent>
+</MudCard>

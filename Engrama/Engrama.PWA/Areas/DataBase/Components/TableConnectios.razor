@@ -1,0 +1,38 @@
+﻿@using Engrama.PWA.Shared.Common
+@inherits EngramaComponent
+@using Engrama.Share.Objetos;
+@using Engrama.Share.Objetos.DataBaseArea;
+<MudTable Items="@Data.LstConnectionString"
+		  T="@ConnectionString"
+		  Dense="@true"
+		  Hover="true"
+		  RowsPerPage="10">
+	<HeaderContent>
+		<MudTh>No</MudTh>
+		<MudTh>Nota</MudTh>
+		@if (bDataBaseModule.False())
+		{
+			<MudTh>vchConnectionString</MudTh>
+		}
+		<MudTh></MudTh>
+	</HeaderContent>
+	<RowTemplate>
+		<MudTd DataLabel="iIdConnectionString">@context.iIdConnectionString</MudTd>
+		<MudTd DataLabel="vchNota">@context.vchNota</MudTd>
+		@if (bDataBaseModule.False())
+		{
+			<MudTd DataLabel="vchNota">@context.vchConnectionString</MudTd>
+		}
+		<MudTd DataLabel="btnSelect">
+			<MudButton Variant="Variant.Filled"
+					   OnClick="@(()=>OnSelectRow(context))"
+					   Color="Color.Primary">
+				Select
+			</MudButton>
+
+		</MudTd>
+	</RowTemplate>
+	<PagerContent>
+		<MudTablePager />
+	</PagerContent>
+</MudTable>

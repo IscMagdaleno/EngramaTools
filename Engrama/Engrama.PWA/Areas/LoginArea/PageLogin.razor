@@ -1,0 +1,58 @@
+﻿@using Engrama.PWA.Areas.LoginArea.Components
+@using Engrama.PWA.Shared.Common
+
+@inherits EngramaPage
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="login-container">
+
+	<MudCard>
+		<MudCardHeader>
+
+		</MudCardHeader>
+		<MudPaper Class="pr-4 pl-4 ml-4 mr-4">
+			<MudGrid>
+
+				<MudItem xs="12" sm="6">
+					<MudImage Src="images/login2.png" Alt="Login Image" Class="login-image" />
+				</MudItem>
+				<MudItem Class="align-self-center" xs="12" sm="6">
+
+					@if (bShowResgistro)
+					{
+						<Registro Data="Data"></Registro>
+					}
+					else
+					{
+						<Login Data="@Data"></Login>
+					}
+
+
+				</MudItem>
+			</MudGrid>
+		</MudPaper>
+		<MudCardActions>
+			@if (bShowResgistro)
+			{
+				<MudButton StartIcon="@Icons.Material.Filled.Edit"
+						   Variant="Variant.Outlined"
+						   OnClick="OnClickRegistro"
+						   Color="Color.Secondary">
+
+					Volver
+				</MudButton>
+			}
+			else
+			{
+				<MudButton StartIcon="@Icons.Material.Filled.Edit"
+						   Variant="Variant.Outlined"
+						   OnClick="OnClickRegistro"
+						   Color="Color.Info">
+
+					Registrarse
+				</MudButton>
+
+			}
+		</MudCardActions>
+
+	</MudCard>
+</MudContainer>

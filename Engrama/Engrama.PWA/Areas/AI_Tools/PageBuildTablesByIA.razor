@@ -1,0 +1,32 @@
+﻿@using Engrama.PWA.Areas.AI_Tools.Componets
+@inherits EngramaPage
+
+@page "/PageBuildTablesByIA"
+
+
+
+<PageTitle>PageBuildTablesByIA</PageTitle>
+
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h6">Build Tables AI</MudText>
+		</CardHeaderContent>
+
+	</MudCardHeader>
+	<MudCardContent>
+
+
+		<MudGrid>
+
+			<MudItem sm="12">
+
+				<GridChat LstChatMessage="Data.LstCodeByIA"
+						  OnSendMessage="OnClickCrearCodigo">
+				</GridChat>
+
+			</MudItem>
+		</MudGrid>
+	</MudCardContent>
+</MudCard>
+

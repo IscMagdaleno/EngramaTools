@@ -1,0 +1,71 @@
+﻿@using Engrama.PWA.Shared.Common
+@inherits EngramaComponent
+
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h6">PageRegistro</MudText>
+		</CardHeaderContent>
+
+	</MudCardHeader>
+	<MudCardContent>
+
+		<EditForm Model="@Data.UsersSelected"
+				  OnValidSubmit="OnSubmit">
+
+			<DataAnnotationsValidator />
+
+
+			<MudFocusTrap>
+
+				<MudGrid>
+					<MudItem sm="12">
+
+
+						<MudTextField @bind-Value="@Data.UsersSelected.vchName"
+									  Label="Name"
+									  MaxLength="50"
+									  For="@(() => Data.UsersSelected.vchName)"
+									  Variant="Variant.Outlined" />
+
+
+						<MudTextField @bind-Value="@Data.UsersSelected.vchEmail"
+									  Label="Email"
+									  MaxLength="150"
+									  For="@(() => Data.UsersSelected.vchEmail)"
+									  Variant="Variant.Outlined" />
+
+
+						<MudTextField @bind-Value="@Data.UsersSelected.vchNickName"
+									  Label="NickName"
+									  MaxLength="50"
+									  For="@(() => Data.UsersSelected.vchNickName)"
+									  Variant="Variant.Outlined" />
+
+
+						<MudTextField @bind-Value="@Data.UsersSelected.vchPass"
+									  Label="Pass"
+									  MaxLength="50"
+									  InputType="InputType.Password"
+									  For="@(() => Data.UsersSelected.vchPass)"
+									  Variant="Variant.Outlined" />
+
+						<MudTextField @bind-Value="@Data.UsersSelected.Password2"
+									  Label="Pass"
+									  For="@(() => Data.UsersSelected.Password2)"
+									  MaxLength="50"
+									  InputType="InputType.Password"
+									  Variant="Variant.Outlined" />
+
+					</MudItem>
+					<MudItem sm="12">
+						<MudButton Variant="Variant.Filled"
+								   FullWidth="true"
+								   ButtonType="@ButtonType.Submit"
+								   Color="Color.Primary">Save</MudButton>
+					</MudItem>
+				</MudGrid>
+			</MudFocusTrap>
+		</EditForm>
+	</MudCardContent>
+</MudCard>

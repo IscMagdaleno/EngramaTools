@@ -1,0 +1,40 @@
+﻿@using EngramaCoreStandar.Extensions;
+@using Engrama.Share.Objetos;
+@using Engrama.PWA.Shared.Common
+@inherits EngramaComponent
+
+<MudGrid>
+
+	@if (Data.LstCatProyectType.NotEmpty())
+	{
+
+		<MudItem sm="12">
+			<MudFab StartIcon="@Icons.Material.Filled.TableRows"
+					Color="Color.Primary"
+					OnClick="@(()=>OnClickFilter(new Catalogue()))"
+					Label="Todos" />
+			@foreach (var item in Data.LstCatProyectType.Where(e => e.iId > 0))
+			{
+				<MudFab StartIcon="@Icons.Material.Filled.TableRows"
+						OnClick="@(()=>OnClickFilter(item))"
+						Label="@item.vchDescription" />
+			}
+
+		</MudItem>
+	}
+
+
+
+	@if (tmpLstCommonScripts.NotEmpty())
+	{
+		@foreach (var item in tmpLstCommonScripts)
+		{
+			<MudItem sm="4">
+				<CardCommonScript Script="@item"
+								  bEnableEdit="@bEnableEdit"
+								  OnEditSelected="@OnEditSelected"
+								  OnCommonScriptSelected="OnCommonScriptSelected" />
+			</MudItem>
+		}
+	}
+</MudGrid>

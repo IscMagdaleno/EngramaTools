@@ -1,0 +1,39 @@
+﻿@page "/PageCodeAnalyzer"
+@using Engrama.PWA.Areas.CodeAnalyzer.Components
+@using Engrama.PWA.Shared.Common
+@using Microsoft.AspNetCore.Authorization
+@inherits EngramaPage
+
+<PageTitle>CodeAnalyzer</PageTitle>
+
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h6">CodeAnalyzer</MudText>
+		</CardHeaderContent>
+
+	</MudCardHeader>
+	<MudCardContent>
+
+
+		<MudGrid>
+			<MudItem sm="12">
+				<FormAnalyzeCode Data="Data"
+								 OnCodeAnalyzed="OnCodeAnalyzed">
+				</FormAnalyzeCode>
+			</MudItem>
+			<MudItem sm="12">
+				<MudGrid>
+					@foreach (var item in Data.LstCodeAnalyzed)
+					{
+						<MudItem sm="4">
+							<CardAnalyzeCode Code="item"
+											 OnCodeAnalyzeAgain="OnCodeAnalyzeAgain">
+							</CardAnalyzeCode>
+						</MudItem>
+					}
+				</MudGrid>
+			</MudItem>
+		</MudGrid>
+	</MudCardContent>
+</MudCard>

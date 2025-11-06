@@ -1,0 +1,28 @@
+﻿@page "/PageCommonScripts"
+@using Engrama.PWA.Areas.CommonScripts
+@using Engrama.PWA.Areas.CommonScripts.Components
+@using Engrama.PWA.Shared.Common
+@inherits EngramaPage
+
+
+<PageTitle>Códigos Rapidos</PageTitle>
+
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h6">Códigos Rapidos</MudText>
+		</CardHeaderContent>
+
+	</MudCardHeader>
+	<MudCardContent>
+
+		<MudGrid>
+			<MudItem sm="12">
+				<GridCommonScripts Data="@Data"/>
+			</MudItem>
+
+		</MudGrid>
+
+
+	</MudCardContent>
+</MudCard>

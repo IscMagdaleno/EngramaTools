@@ -1,0 +1,58 @@
+﻿@using Engrama.PWA.Shared.Common
+@inherits EngramaComponent
+
+@using EngramaCoreStandar.Extensions;
+@using Engrama.Share.Objetos;
+@using Engrama.Share.Objetos.DataBaseArea;
+
+@if (LstTables.NotEmpty())
+{
+	<MudGrid>
+		<MudItem sm="12">
+
+			<MudTable Items="@LstTables"
+					  T="Table"
+					  Dense="@true"
+					  Hover="true"
+					  OnRowClick="@TablaSelected"
+					  RowsPerPage="15"
+					  Filter="new Func<Table,bool>(FilterFunc1)">
+
+				<ToolBarContent>
+
+					<MudTextField @bind-Value="searchStringFilto"
+								  Placeholder="Search..."
+								  Adornment="Adornment.Start"
+								  AdornmentIcon="@Icons.Material.Filled.Search"
+								  IconSize="Size.Medium"
+								  Class="mt-0" />
+				</ToolBarContent>
+
+				<HeaderContent>
+					<MudTh>No</MudTh>
+					<MudTh>Name</MudTh>
+					<MudTh>Primary Key</MudTh>
+					<MudTh>No Rows</MudTh>
+
+
+				</HeaderContent>
+				<RowTemplate>
+					<MudTd DataLabel="iIdTable">@context.iIdTable</MudTd>
+					<MudTd DataLabel="vchName">@context.vchName</MudTd>
+					<MudTd DataLabel="vchPrimaryKey">@context.vchPrimaryKey</MudTd>
+					<MudTd DataLabel="iNoRows">@context.iNoRows</MudTd>
+				</RowTemplate>
+				<PagerContent>
+					<MudTablePager />
+				</PagerContent>
+			</MudTable>
+
+
+		</MudItem>
+
+
+	</MudGrid>
+}
+
+
+

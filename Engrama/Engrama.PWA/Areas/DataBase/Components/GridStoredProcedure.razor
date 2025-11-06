@@ -1,0 +1,169 @@
+﻿@using Engrama.PWA.Shared.Common
+@inherits EngramaComponent
+@using Engrama.PWA.Areas.CodeAnalyzer.Components
+
+
+<MudGrid>
+
+	<MudItem sm="@(bShowDetails? 6 : 12)">
+		<MudGrid>
+			<MudItem sm="12">
+
+				<MudPaper Class=" pa-4 align-start d-flex"  Outlined="true">
+					<MudButton Variant="Variant.Filled"
+							   StartIcon="@Icons.Material.Filled.Downloading"
+							   OnClick="OnInitializedAsync"
+							   Color="Color.Success">
+						Recargar
+					</MudButton>
+					<MudSpacer />
+					<MudButton Variant="Variant.Filled"
+							   Color="Color.Info"
+							   OnClick="OnClickDescargar">
+						Descargar Todos
+					</MudButton>
+				</MudPaper>
+
+
+
+				<MudSpacer />
+
+
+
+			</MudItem>
+		</MudGrid>
+		<TableStoredProcedures LstStoredProcedures="@Data.LstStoredProcedures"
+							   OnStoredProcedureSelected="OnStoredProcedureSelected" />
+	</MudItem>
+
+	@if (bShowDetails)
+	{
+		<MudItem sm="6">
+
+
+			@* 	<MudButton Disabled="@_processing" OnClick="ProcessSomething" Variant="Variant.Filled" Color="Color.Primary">
+				@if (_processing)
+				{
+					<MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+					<MudText Class="ms-2">Processing</MudText>
+				}
+				else
+				{
+					<MudText>Analizar IA</MudText>
+				}
+			</MudButton> *@
+			<MudButton Variant="Variant.Filled"
+					   Color="Color.Info"
+					   OnClick="OnClickDescargarIndividual">
+				Descargar SP
+			</MudButton>
+
+			<MudTextField @bind-Value="@Data.StoredProcedureSelected.Details.Code"
+						  Label="Código"
+						  Lines="30"
+						  Variant="Variant.Outlined">
+			</MudTextField>
+
+
+		</MudItem>
+		@if (Data.StoredProcedureSelected.LstAnalizedIA.NotEmpty())
+		{
+			<MudItem sm="12">
+				<MudTabs Elevation="2"
+						 Rounded="true"
+						 Border="true"
+						 Position="Position.Top"
+						 Color="@Color.Info"
+						 ApplyEffectsToContainer="true"
+						 Class="mt-8"
+						 PanelClass="pa-6">
+					@foreach (var item in Data.StoredProcedureSelected.LstAnalizedIA)
+					{
+						<MudTabPanel Text="Código Analizado">
+							<BigCardCodeAnalyzed Code="@item"></BigCardCodeAnalyzed>
+						</MudTabPanel>
+					}
+				</MudTabs>
+
+			</MudItem>
+		}
+
+
+		<MudItem sm="12">
+
+			<MudGrid>
+				<MudItem sm="6">
+					<TableParameters Variables="@Data.StoredProcedureSelected.Details.InputParameters"
+									 Title="Input Parameters" />
+
+				</MudItem>
+				<MudItem sm="6">
+					<TableParameters Variables="@Data.StoredProcedureSelected.Details.OutputParameters"
+									 Title="Output Parameters" />
+				</MudItem>
+
+			</MudGrid>
+		</MudItem>
+
+
+		<MudItem sm="12">
+
+			<MudItem sm="12">
+
+
+				<MudTabs Elevation="2"
+						 Rounded="true"
+						 Border="true"
+						 Position="Position.Top"
+						 Color="@Color.Info"
+						 ApplyEffectsToContainer="true"
+						 Class="mt-8"
+						 PanelClass="pa-6">
+
+					@foreach (var buildedCode in Data.StoredProcedureSelected.Details.BuildedCodes)
+					{
+						<MudTabPanel Text="@buildedCode.vchName">
+
+
+
+							<MudTabs Elevation="2"
+									 Rounded="true"
+									 Border="true"
+									 Position="Position.Top"
+									 Color="@Color.Info"
+									 ApplyEffectsToContainer="true"
+									 Class="mt-8"
+									 PanelClass="pa-6">
+
+								@foreach (var script in buildedCode.Scripts)
+								{
+									<MudTabPanel Text="@script.vchName">
+
+
+										<CodeBlock Code="@script.vchCode"
+												   Language="csharp"
+												   Title="script.vchName">
+										</CodeBlock>
+
+
+
+
+									</MudTabPanel>
+								}
+
+
+							</MudTabs>
+
+
+						</MudTabPanel>
+					}
+
+
+				</MudTabs>
+
+			</MudItem>
+		</MudItem>
+
+	}
+
+</MudGrid>

@@ -1,0 +1,37 @@
+﻿@using Engrama.PWA.Shared.Common
+@inherits EngramaComponent
+
+<EditForm Model="@Data.Credentials"
+		  OnValidSubmit="OnClickLogin">
+
+
+	<DataAnnotationsValidator />
+
+	<MudFocusTrap>
+		<MudGrid>
+			<MudItem sm="12" Class="mr-2">
+
+				<MudTextField @bind-Value="@Data.Credentials.vchNickName"
+							  Label="NickName"
+							  Variant="Variant.Outlined" />
+			</MudItem>
+			<MudItem sm="12" Class="mr-2">
+
+				<MudTextField @bind-Value="@Data.Credentials.vchPassword"
+							  Label="Password"
+							  InputType="InputType.Password"
+							  Variant="Variant.Outlined" />
+			</MudItem>
+			<MudItem sm="12" Class="mr-2">
+
+				<MudButton Variant="Variant.Filled"
+						   Class="flex-shrink-1 "
+						   ButtonType="ButtonType.Submit"
+						   FullWidth="true"
+						   Color="Color.Primary">Login</MudButton>
+
+			</MudItem>
+		</MudGrid>
+	</MudFocusTrap>
+
+</EditForm>

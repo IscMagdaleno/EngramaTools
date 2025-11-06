@@ -1,0 +1,76 @@
+﻿@using Engrama.PWA.Shared.Common
+@using Engrama.Share.Objetos
+@inherits EngramaComponent
+
+<EditForm Model="@Data.CommonScriptsSelected"
+		  OnValidSubmit="OnSubmit">
+
+	<DataAnnotationsValidator />
+
+	<MudFocusTrap>
+
+		<MudCard>
+
+			<MudCardContent>
+
+
+				<MudGrid>
+
+					<MudItem sm="6">
+
+
+						<MudTextField @bind-Value="@Data.CommonScriptsSelected.vchName"
+									  Label="Name"
+									  MaxLength="250"
+									  Variant="Variant.Outlined" />
+
+
+					</MudItem>
+					<MudItem sm="6">
+
+						<MudSelect @bind-Value="@Data.CommonScriptsSelected.CatProyectType"
+								   T="@Catalogue"
+								   Label="Proyect Type"
+								   Variant="Variant.Outlined"
+								   Clearable="true">
+							@foreach (var Type in Data.LstCatProyectType.ToList())
+							{
+								<MudSelectItem Value="Type">@Type.vchDescription</MudSelectItem>
+							}
+						</MudSelect>
+
+
+					</MudItem>
+
+					<MudItem sm="12">
+						<MudTextField @bind-Value="@Data.CommonScriptsSelected.vchDescription"
+									  Label="Description"
+									  MaxLength="500"
+									  Variant="Variant.Outlined" />
+
+
+
+
+					</MudItem>
+					<MudItem sm="12">
+
+						<MudTextField @bind-Value="@Data.CommonScriptsSelected.vchCode"
+									  Label="Code"
+									  Lines="25"
+									  Variant="Variant.Outlined" />
+
+
+					</MudItem>
+
+				</MudGrid>
+			</MudCardContent>
+			<MudCardActions>
+				<MudButton Variant="Variant.Filled"
+						   ButtonType="ButtonType.Submit"
+						   Color="Color.Secondary">
+					Guardar
+				</MudButton>
+			</MudCardActions>
+		</MudCard>
+	</MudFocusTrap>
+</EditForm>

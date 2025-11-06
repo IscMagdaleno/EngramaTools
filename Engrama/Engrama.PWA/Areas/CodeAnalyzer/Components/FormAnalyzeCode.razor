@@ -1,0 +1,31 @@
+﻿@using Engrama.PWA.Shared.Common
+@inherits EngramaComponent
+
+<MudCard>
+	<MudCardContent>
+
+		<MudGrid>
+			<MudItem sm="12">
+				<MudTextField T="string"
+							  Label="Entrada Código"
+							  Variant="Variant.Outlined"
+							  @bind-Value="@Data.CodeAnalyzed.vchCode"
+							  Lines="25" />
+			</MudItem>
+		</MudGrid>
+
+	</MudCardContent>
+	<MudCardActions>
+		<MudButton Variant="Variant.Filled"
+				   OnClick="OnClickAnalyze"
+				   Color="Color.Primary">
+			Analizar
+		</MudButton>
+		<MudSpacer></MudSpacer>
+		<MudButton Variant="Variant.Filled"
+				   OnClick="OnClickLimpiar"
+				   Color="Color.Secondary">
+			Limpiar
+		</MudButton>
+	</MudCardActions>
+</MudCard>

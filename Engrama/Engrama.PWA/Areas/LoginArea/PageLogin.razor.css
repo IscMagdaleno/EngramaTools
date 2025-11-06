@@ -1,0 +1,23 @@
+﻿html, body {
+	height: 100%;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #6a1b9a; /* Adjust this as per your background color */
+}
+
+
+.login-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+}
+
+	.login-container .MudPaper {
+		padding: 24px; /* Add some padding for a better visual */
+		width: 100%;
+		max-width: 500px; /* Set a reasonable max width */
+	}

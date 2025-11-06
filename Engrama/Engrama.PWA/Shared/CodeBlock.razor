@@ -1,0 +1,352 @@
+﻿@using Microsoft.JSInterop
+@using System.Text.RegularExpressions
+@inject IJSRuntime JSRuntime
+
+<MudPaper Class="code-block-container" Elevation="2">
+    <div class="code-header">
+        <div class="code-language">
+            <MudIcon Icon="@GetLanguageIcon()" Size="Size.Small" />
+            <span>@Language.ToUpper()</span>
+        </div>
+        <MudTooltip Text="Copiar código">
+            <MudIconButton Icon="@Icons.Material.Filled.ContentCopy" 
+                          Size="Size.Small" 
+                          Class="copy-button"
+                          OnClick="CopyToClipboard" />
+        </MudTooltip>
+    </div>
+    <div class="code-content">
+        <pre><code class="@($"language-{Language.ToLower()}")">@((MarkupString)FormattedCode)</code></pre>
+    </div>
+</MudPaper>
+
+
+
+@code {
+    [Inject] protected ISnackbar Snackbar { get; set; }
+
+    [Parameter] public string Code { get; set; } = string.Empty;
+    [Parameter] public string Language { get; set; } = "text";
+    [Parameter] public string Title { get; set; } = string.Empty;
+
+
+    protected override void OnInitialized()
+    {
+        FormattedCode = HighlightCode(Code, Language);
+    }
+
+    private string FormattedCode { get; set; } = string.Empty;
+
+    private async Task CopyToClipboard()
+    {
+        await JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", Code);
+        Snackbar.Add("Código copiado");
+    }
+
+    private string GetLanguageIcon()
+    {
+        return Language.ToLower() switch
+        {
+            "csharp" or "c#" => Icons.Custom.FileFormats.FileCode,
+            "sql" => Icons.Material.Filled.Storage,
+            "html" => Icons.Material.Filled.Language,
+            "css" => Icons.Material.Filled.Palette,
+            "javascript" or "js" => Icons.Custom.FileFormats.FileCode,
+            "razor" => Icons.Material.Filled.Build,
+            _ => Icons.Material.Filled.Code
+        };
+    }
+
+    private string HighlightCode(string code, string language)
+    {
+        // Escapar HTML para evitar inyección
+        var escapedCode = System.Net.WebUtility.HtmlEncode(code);
+        
+        return language.ToLower() switch
+        {
+            "csharp" or "c#" => HighlightCSharp(escapedCode),
+            "sql" => HighlightSQL(escapedCode),
+            "html" => HighlightHTML(escapedCode),
+            "css" => HighlightCSS(escapedCode),
+            "razor" => HighlightRazor(escapedCode),
+            _ => $"<span class=\"code-text\">{escapedCode}</span>"
+        };
+    }
+
+    private string HighlightCSharp(string code)
+    {
+    
+        // // Palabras clave de C#
+        // var keywords = new[] { "public", "private", "protected", "internal", "static", "readonly", "const",
+        // "class", "interface", "struct", "enum", "namespace", "using", "var", "string",
+        // "int", "bool", "void", "return", "if", "else", "for", "foreach", "while",
+        // "switch", "case", "default", "try", "catch", "finally", "throw", "new",
+        // "this", "base", "override", "virtual", "abstract", "sealed", "async", "await" };
+
+        // // Unir keywords en una sola expresión regular
+        // var keywordPattern = @"\b(" + string.Join("|", keywords.Select(Regex.Escape)) + @")\b";
+
+        // // Reemplazar palabras clave
+        // code = Regex.Replace(code, keywordPattern, match =>
+        // {
+        //     return $"<span class=\"keyword\">{match.Value}</span>";
+        // });
+
+        // // Reemplazar cadenas de texto (string literals)
+        // code = Regex.Replace(code, "\"([^\"]*?)\"", match =>
+        // {
+        //     return $"<span class=\"string\">{match.Value}</span>";
+        // });
+
+        // // Reemplazar comentarios (línea simple //)
+        // code = Regex.Replace(code, @"//(.*)$", match =>
+        // {
+        //     return $"<span class=\"comment\">//{match.Groups[1].Value}</span>";
+        // }, RegexOptions.Multiline);
+
+        return code;
+    }
+
+
+    private string HighlightSQL(string code)
+    {
+        // var keywords = new[] { "SELECT", "FROM", "WHERE", "INSERT", "UPDATE", "DELETE", "CREATE", "ALTER", 
+        //                       "DROP", "TABLE", "INDEX", "VIEW", "JOIN", "INNER", "LEFT", "RIGHT", "FULL", 
+        //                       "ON", "ORDER", "BY", "GROUP", "HAVING", "UNION", "AND", "OR", "NOT", "NULL", 
+        //                       "PRIMARY", "KEY", "FOREIGN", "REFERENCES", "CONSTRAINT", "DEFAULT", "UNIQUE" };
+        
+        // foreach (var keyword in keywords)
+        // {
+        //     code = System.Text.RegularExpressions.Regex.Replace(code, 
+        //         $@"\b{keyword}\b", 
+        //         $"<span class=\"sql-keyword\">{keyword}</span>", 
+        //         System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+        // }
+
+        // // Strings SQL
+        // code = System.Text.RegularExpressions.Regex.Replace(code, 
+        //     "'([^']*?)'", 
+        //     "<span class=\"string\">'$1'</span>");
+
+        // // Comentarios SQL
+        // code = System.Text.RegularExpressions.Regex.Replace(code, 
+        //     "--(.*)$", 
+        //     "<span class=\"comment\">--$1</span>", 
+        //     System.Text.RegularExpressions.RegexOptions.Multiline);
+
+        return code;
+    }
+
+    private string HighlightHTML(string code)
+    {
+        // // Tags HTML
+        // code = System.Text.RegularExpressions.Regex.Replace(code, 
+        //     "&lt;(/?)([a-zA-Z][a-zA-Z0-9]*)", 
+        //     "&lt;<span class=\"html-tag\">$1$2</span>");
+
+        // // Atributos
+        // code = System.Text.RegularExpressions.Regex.Replace(code, 
+        //     @"(\s)([a-zA-Z-]+)=", 
+        //     "$1<span class=\"html-attr\">$2</span>=");
+
+        // // Valores de atributos
+        // code = System.Text.RegularExpressions.Regex.Replace(code, 
+        //     "=\"([^\"]*?)\"", 
+        //     "=\"<span class=\"html-value\">$1</span>\"");
+
+        return code;
+    }
+
+    private string HighlightCSS(string code)
+    {
+        // // Selectores CSS
+        // code = System.Text.RegularExpressions.Regex.Replace(code, 
+        //     @"([.#]?[a-zA-Z][a-zA-Z0-9-]*)\s*\{", 
+        //     "<span class=\"css-selector\">$1</span> {");
+
+        // // Propiedades CSS
+        // code = System.Text.RegularExpressions.Regex.Replace(code, 
+        //     @"([a-zA-Z-]+)\s*:", 
+        //     "<span class=\"css-property\">$1</span>:");
+
+        // // Valores CSS
+        // code = System.Text.RegularExpressions.Regex.Replace(code, 
+        //     @":\s*([^;]+);", 
+        //     ": <span class=\"css-value\">$1</span>;");
+
+        return code;
+    }
+
+    private string HighlightRazor(string code)
+    {
+        // // Directivas Razor
+        // code = System.Text.RegularExpressions.Regex.Replace(code, 
+        //     @"@([a-zA-Z]+)", 
+        //     "<span class=\"razor-directive\">@$1</span>");
+
+        // // Código C# en Razor
+        // code = System.Text.RegularExpressions.Regex.Replace(code, 
+        //     @"@\{([^}]+)\}", 
+        //     "@{<span class=\"razor-code\">$1</span>}");
+
+        return code;
+    }
+}
+<style>
+    .keyword {
+        color: #007acc;
+        font-weight: bold;
+    }
+
+    .string {
+        color: #a31515;
+    }
+
+    .comment {
+        color: #6a9955;
+        font-style: italic;
+    }
+</style>
+
+<style>
+    .code-block-container {
+        background: #1e1e1e;
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 1rem 0;
+        border: 1px solid #333;
+    }
+
+    .code-header {
+        background: #2d2d2d;
+        padding: 0.75rem 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #333;
+    }
+
+    .code-language {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #9cdcfe;
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+
+    .copy-button {
+        color: #9cdcfe;
+        transition: color 0.2s ease;
+    }
+
+    .copy-button:hover {
+        color: #ffffff;
+        background-color: rgba(156, 220, 254, 0.1);
+    }
+
+    .code-content {
+        padding: 1rem;
+        overflow-x: auto;
+    }
+
+    .code-content pre {
+        margin: 0;
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        color: #d4d4d4;
+    }
+
+    .code-content code {
+        background: none;
+        padding: 0;
+        font-size: inherit;
+        color: inherit;
+    }
+
+    /* Syntax highlighting styles */
+    .keyword {
+        color: #569cd6;
+        font-weight: 500;
+    }
+
+    .string {
+        color: #ce9178;
+    }
+
+    .comment {
+        color: #6a9955;
+        font-style: italic;
+    }
+
+    .sql-keyword {
+        color: #569cd6;
+        font-weight: 500;
+    }
+
+    .html-tag {
+        color: #9cdcfe;
+    }
+
+    .html-attr {
+        color: #92c5f8;
+    }
+
+    .html-value {
+        color: #ce9178;
+    }
+
+    .css-selector {
+        color: #d7ba7d;
+    }
+
+    .css-property {
+        color: #9cdcfe;
+    }
+
+    .css-value {
+        color: #ce9178;
+    }
+
+    .razor-directive {
+        color: #c586c0;
+        font-weight: 500;
+    }
+
+    .razor-code {
+        color: #9cdcfe;
+    }
+
+    .code-text {
+        color: #d4d4d4;
+    }
+
+    .copy-snackbar {
+        background-color: #4caf50 !important;
+    }
+
+    .snackbar-content {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    /* Scrollbar personalizado */
+    .code-content::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .code-content::-webkit-scrollbar-track {
+        background: #2d2d2d;
+    }
+
+    .code-content::-webkit-scrollbar-thumb {
+        background: #555;
+        border-radius: 4px;
+    }
+
+    .code-content::-webkit-scrollbar-thumb:hover {
+        background: #777;
+    }
+</style>

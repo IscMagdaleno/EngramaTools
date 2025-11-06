@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Engrama.PWA.Areas.LoginArea
+@using Engrama.PWA.Shared.Common
+@inherits LayoutComponentBase
+
+<MudThemeProvider IsDarkMode="true" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+<MudPopoverProvider />
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+
+<MudLayout>
+	<MudAppBar Dense="true" Elevation="0" Color="Color.Transparent">
+		<AuthorizeView>
+			<Authorized>
+				<MudIconButton Icon="@Icons.Material.Filled.Menu"
+							   Color="Color.Inherit"
+							   Edge="Edge.Start"
+							   OnClick="@((e) => DrawerToggle())" />
+
+				<MudSpacer />
+				<MudFab Color="Color.Primary"
+						StartIcon="@Icons.Material.Filled.Logout"
+						OnClick="OnclickLogOut" />
+
+
+
+			</Authorized>
+		</AuthorizeView>
+
+	</MudAppBar>
+	<AuthorizeView>
+		<Authorized>
+			<MudDrawer @bind-Open="_drawerOpen" Elevation="1">
+				<MudDrawerHeader>
+					<MudText Typo="Typo.h6">Engrama Tools</MudText>
+				</MudDrawerHeader>
+				<NavMenu />
+			</MudDrawer>
+		</Authorized>
+	</AuthorizeView>
+	<MudMainContent>
+		<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="my-5 ">
+
+			<AuthorizeView>
+				<Authorized>
+					@Body
+				</Authorized>
+				<NotAuthorized>
+					<PageLogin></PageLogin>
+				</NotAuthorized>
+
+			</AuthorizeView>
+
+			<Loading></Loading>
+
+		</MudContainer>
+	</MudMainContent>
+</MudLayout>

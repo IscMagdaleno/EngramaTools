@@ -1,0 +1,133 @@
+﻿
+
+<MudGrid>
+
+	<MudItem sm="7">
+
+		<MudCard Style="height: 100%; display: flex; flex-direction: column;">
+			<MudImage Src="images/database.png" Style=" width: 100%; object-fit: contain;" />
+			<MudCardContent>
+				<MudText Typo="Typo.h5">Base de Datos</MudText>
+				<MudText Typo="Typo.body2">
+					Analiza la base de datos para obtener las tablas y los
+					Procedimientos almacenados
+				</MudText>
+			</MudCardContent>
+			<MudCardActions>
+				<MudButton Variant="Variant.Filled"
+						   FullWidth="true"
+						   OnClick="@(()=>NavigateToPages("PageDataBase"))"
+						   Color="Color.Primary">Abrir</MudButton>
+			</MudCardActions>
+		</MudCard>
+	</MudItem>
+
+	<MudItem sm="5">
+		<MudGrid>
+
+			<MudItem sm="6">
+				<MudCard Style="height: 100%; display: flex; flex-direction: column;">
+					<MudImage Src="images/database.png" Style="max-height: 200px; width: 100%; object-fit: contain;" />
+					<MudCardContent>
+						<MudText Typo="Typo.h5">Analizar Código C# IA </MudText>
+						<MudText Typo="Typo.body2">
+							Herramienta para analizar y mejorar el código C# utilizando inteligencia artificial..
+						</MudText>
+					</MudCardContent>
+					<MudCardActions>
+						<MudButton Variant="Variant.Filled"
+								   FullWidth="true"
+								   OnClick="@(()=>NavigateToPages("PageImproveCSharpCode"))"
+								   Color="Color.Primary">Abrir</MudButton>
+					</MudCardActions>
+				</MudCard>
+			</MudItem>
+
+			<MudItem sm="6">
+				<MudCard Style="height: 100%; display: flex; flex-direction: column;">
+					<MudImage Src="images/database.png" Style="max-height: 200px; width: 100%; object-fit: contain;" />
+					<MudCardContent>
+						<MudText Typo="Typo.h5">Genera SQL Tablas IA</MudText>
+						<MudText Typo="Typo.body2">
+							Herramienta para generar las tablas automáticamente con IA estructuradas para funcionar con el entorno Engrama.
+						</MudText>
+					</MudCardContent>
+					<MudCardActions>
+						<MudButton Variant="Variant.Filled" 
+								   FullWidth="true"
+								   OnClick="@(()=>NavigateToPages("PageBuildTablesByIA"))"
+								   Color="Color.Primary">Abrir</MudButton>
+					</MudCardActions>
+				</MudCard>
+			</MudItem>
+
+			<MudItem sm="6">
+				<MudCard Style="height: 100%; display: flex; flex-direction: column;">
+					<MudImage Src="images/database.png" Style="max-height: 200px; width: 100%; object-fit: contain;" />
+					<MudCardContent>
+						<MudText Typo="Typo.h5">SQL Code Tablas IA</MudText>
+						<MudText Typo="Typo.body2">
+							Herramienta crear código SQL a partir de la selección de tablas de una base de datos, totalmente con IA.
+						</MudText>
+					</MudCardContent>
+					<MudCardActions>
+						<MudButton Variant="Variant.Filled"
+								   FullWidth="true"
+								   OnClick="@(()=>NavigateToPages("PageCodeByTables"))"
+								   Color="Color.Primary">Abrir</MudButton>
+					</MudCardActions>
+				</MudCard>
+			</MudItem>
+
+			<MudItem sm="6">
+				<MudCard Style="height: 100%; display: flex; flex-direction: column;">
+					<MudImage Src="images/database.png" Style="max-height: 200px; width: 100%; object-fit: contain;" />
+					<MudCardContent>
+						<MudText Typo="Typo.h5">SQL StoreProcedure IA</MudText>
+						<MudText Typo="Typo.body2">
+							Herramienta crear código SQL a partir de la selección de Procedimientos Almacenados de una base de datos, totalmente con IA.
+						</MudText>
+					</MudCardContent>
+					<MudCardActions>
+						<MudButton Variant="Variant.Filled"
+								   FullWidth="true"
+								   OnClick="@(()=>NavigateToPages("PageImproveSpWithAI"))"
+								   Color="Color.Primary">Abrir</MudButton>
+					</MudCardActions>
+				</MudCard>
+			</MudItem>
+		</MudGrid>
+
+	</MudItem>
+	<MudItem sm="3">
+		<MudCard Style="height: 100%; display: flex; flex-direction: column;">
+			<MudImage Src="images/coding.png"
+					  Alt="Codigos Rapidos"
+					  Style="max-height: 200px; width: 100%; object-fit: contain;" />
+
+			<MudCardContent>
+				<MudText Typo="Typo.h5">Código Rápidos</MudText>
+				<MudText Typo="Typo.body2">
+					Código de uso común para que no reescribirlo una y otra vez... copea, pega, ejecuta.
+				</MudText>
+			</MudCardContent>
+			<MudCardActions>
+				<MudButton Variant="Variant.Filled"
+						   FullWidth="true"
+						   OnClick="@(()=>NavigateToPages("PageCommonScripts"))"
+						   Color="Color.Primary">Abrir</MudButton>
+			</MudCardActions>
+		</MudCard>
+	</MudItem>
+</MudGrid>
+
+
+
+@inject NavigationManager NavigationManager
+
+@code {
+	private void NavigateToPages(string page)
+	{
+		NavigationManager.NavigateTo("/" + page);
+	}
+}

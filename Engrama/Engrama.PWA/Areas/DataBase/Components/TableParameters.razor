@@ -1,0 +1,39 @@
+﻿@using Engrama.PWA.Shared.Common
+@inherits EngramaComponent
+@using Engrama.Share.Objetos;
+@using Engrama.Share.Objetos.DataBaseArea;
+
+
+<MudTable Items="@Variables"
+		  T="Variable"
+		  Dense="@true"
+		  Hover="true"
+		  RowsPerPage="10">
+
+	<ToolBarContent>
+		<MudText Typo="Typo.h6">@Title</MudText>
+	</ToolBarContent>
+	<HeaderContent>
+		<MudTh>Name</MudTh>
+		<MudTh>DataType SQL</MudTh>
+		<MudTh>DataTpe C#</MudTh>
+
+
+	</HeaderContent>
+	<RowTemplate>
+		<MudTd DataLabel="vchName">@context.vchName</MudTd>
+		<MudTd DataLabel="vchSQLType">@context.vchSQLType</MudTd>
+		<MudTd DataLabel="vchCSharpType">@context.vchCSharpType</MudTd>
+	</RowTemplate>
+	<PagerContent>
+		<MudTablePager />
+	</PagerContent>
+</MudTable>
+
+
+@code {
+
+	[Parameter] public List<Variable> Variables { get; set; }
+	[Parameter] public string Title { get; set; }
+}
+

@@ -1,0 +1,108 @@
+﻿--Estructura para procedimiento almacenado para guardar información en la base de datos con necesidad de transacciones.
+
+
+IF OBJECT_ID( 'spSaveArticulo' ) IS NULL
+	EXEC ('CREATE PROCEDURE spSaveArticulo AS SET NOCOUNT ON;') 
+GO 
+ALTER PROCEDURE dbo.spSaveArticulo
+    @iIdArticulo    INT,
+    @iIdProveedor   INT,
+    @nvchNombre     NVARCHAR(200),
+    @vchCodigo      VARCHAR(50),
+    @nvchDescripcion NVARCHAR(1000),
+    @mPrecioCompra  MONEY,
+    @mPrecioVenta   MONEY,
+    @smCantidad     SMALLINT           
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SET XACT_ABORT ON; 
+
+    DECLARE @vchError VARCHAR(500) = '';
+
+    --Tabla de respuesta 
+    DECLARE @Result AS TABLE
+    (
+        bResult     BIT           DEFAULT (1),
+        vchMessage  VARCHAR(500)  DEFAULT (''),
+        --Otro atributos a devolver--
+        iIdArticulo INT           DEFAULT (-1)
+    );
+
+    BEGIN TRY
+    -- Se crea una transacción para asegurar la atomicidad de la operación
+        BEGIN TRANSACTION;
+
+        -- Insertar en la base de datos en caso de exista valor en el Id de la tabla recibido 
+        IF @iIdArticulo <= 0
+        BEGIN
+            INSERT INTO dbo.Articulo
+            (
+                nvchNombre,
+                vchCodigo,
+                mPrecioCompra,
+                mPrecioVenta,
+                iIdProveedor,
+                nvchDescripcion
+            )
+            VALUES
+            (
+                @nvchNombre,
+                @vchCodigo,
+                @mPrecioCompra,
+                @mPrecioVenta,
+                @iIdProveedor,
+                @nvchDescripcion
+            );
+
+            SET @iIdArticulo = CAST(SCOPE_IDENTITY() AS INT); -- Obtener nuevo ID
+        END
+        ELSE
+        BEGIN
+            -- Actualizar item existente
+            UPDATE dbo.Articulo WITH(ROWLOCK)
+            SET
+                nvchNombre      = @nvchNombre,
+                vchCodigo       = @vchCodigo,
+                mPrecioCompra   = @mPrecioCompra,
+                mPrecioVenta    = @mPrecioVenta,
+                iIdProveedor    = @iIdProveedor,
+                nvchDescripcion = @nvchDescripcion
+            WHERE iIdArticulo = @iIdArticulo;
+        END
+
+     
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+
+        SET @vchError = CONCAT(
+            'spSaveArticulo: ', ERROR_MESSAGE(), 
+            ' [', ERROR_PROCEDURE(), ' - Line ', ERROR_LINE(), ']'
+        );
+        PRINT @vchError;
+    END CATCH
+
+    -- En caso de error devuelvo el mensage de error
+    IF LEN(@vchError) > 0
+    BEGIN
+        INSERT INTO @Result (bResult, vchMessage)
+        VALUES (0, @vchError);
+    END
+    ELSE
+    BEGIN
+        INSERT INTO @Result (bResult, vchMessage, iIdArticulo)
+        VALUES (1, '', @iIdArticulo);
+    END
+
+    --Devuelvo resultado
+    SELECT * FROM @Result;
+
+    SET NOCOUNT OFF;
+END
+
+GO 
+
+

@@ -1,0 +1,44 @@
+﻿@using Engrama.PWA.Areas.AI_Tools.Componets
+@inherits EngramaPage
+
+@page "/PageImproveCSharpCode"
+
+
+
+<PageTitle>PageImproveCSharpCode</PageTitle>
+
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h6">Mejora el codigo de C#</MudText>
+		</CardHeaderContent>
+
+	</MudCardHeader>
+	<MudCardContent>
+
+
+		<MudGrid>
+			<MudItem sm="12">
+
+
+				<!-- Input Area -->
+				<MudTextField @bind-Value="CodigoCSharp"
+							  Placeholder="Agrege el codigo a mejorar ..."
+							  Variant="Variant.Outlined" 
+
+							  Lines="25"
+							  FullWidth="true"/>
+
+			</MudItem>
+			<MudItem sm="12">
+
+				<GridChat LstChatMessage="Data.LstCodeByIA"
+						  Lenguaje="csharp"
+						  OnSendMessage="OnClickCrearCodigo">
+				</GridChat>
+
+			</MudItem>
+		</MudGrid>
+	</MudCardContent>
+</MudCard>
+

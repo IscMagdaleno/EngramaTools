@@ -1,0 +1,85 @@
+﻿<MudNavMenu>
+	<MudNavLink Href=""
+				Match="NavLinkMatch.All"
+				Icon="@Icons.Material.Filled.Home">
+		Home
+	</MudNavLink>
+
+	<MudNavGroup Title="Base De Datos"
+				 Expanded="true">
+
+
+		<MudNavLink Href="PageConnectionsString"
+					Match="NavLinkMatch.Prefix"
+					Icon="@Icons.Material.Filled.Commit">
+			Cadenas de conexión
+		</MudNavLink>
+
+		<MudNavLink Href="PageDataBase"
+					Match="NavLinkMatch.Prefix"
+					Icon="@Icons.Material.Filled.ScreenSearchDesktop">
+			Analizar Base Datos
+		</MudNavLink>
+
+	</MudNavGroup>
+
+	<MudNavGroup Title="Analisis y Generación IA"
+				 Expanded="true">
+
+		<MudNavLink Href="PageImproveCSharpCode"
+					Match="NavLinkMatch.Prefix"
+					Icon="@Icons.Material.Filled.GeneratingTokens">
+			Analizar Código
+		</MudNavLink>
+
+		<MudNavLink Href="PageBuildTablesByIA"
+					Match="NavLinkMatch.Prefix"
+					Icon="@Icons.Material.Filled.GeneratingTokens">
+			Genera SQL Tablas IA
+		</MudNavLink>
+		<MudNavLink Href="PageCodeByTables"
+					Match="NavLinkMatch.Prefix"
+					Icon="@Icons.Material.Filled.GeneratingTokens">
+			Herramientas Tablas IA
+		</MudNavLink>
+		<MudNavLink Href="PageImproveSpWithAI"
+					Match="NavLinkMatch.Prefix"
+					Icon="@Icons.Material.Filled.GeneratingTokens">
+			Herramientas Procedures IA
+		</MudNavLink>
+	</MudNavGroup>
+
+
+	<MudNavGroup Title="Código Rapido"
+				 Expanded="true">
+
+		<MudNavLink Href="PageCommonScripts"
+					Match="NavLinkMatch.Prefix"
+					Icon="@Icons.Material.Filled.TextSnippet">
+			Códigos
+		</MudNavLink>
+		
+		<MudNavLink Href="documentation"
+					Match="NavLinkMatch.Prefix"
+					Icon="@Icons.Material.Filled.TextSnippet">
+			documentation
+		</MudNavLink>
+
+		<AuthorizeView Roles="Admin">
+			<Authorized>
+				<MudNavLink Href="PageAdminCommonScript"
+							Match="NavLinkMatch.Prefix"
+							Icon="@Icons.Material.Filled.AddComment">
+					Admin Códigos
+				</MudNavLink>
+			</Authorized>
+
+		</AuthorizeView>
+
+
+	</MudNavGroup>
+
+
+
+
+</MudNavMenu>

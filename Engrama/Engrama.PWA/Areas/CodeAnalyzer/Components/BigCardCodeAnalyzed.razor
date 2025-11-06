@@ -1,0 +1,47 @@
+﻿@using Engrama.Share.Objetos.AnalyzeCodeArea
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h6">@Code.CodeAnalizedDetails.vchTitle</MudText>
+
+		</CardHeaderContent>
+	</MudCardHeader>
+	<MudCardContent>
+
+		<MudText Typo="Typo.body1">@Code.CodeAnalizedDetails.vchDescriptinos</MudText>
+
+		<MudGrid>
+			<MudItem sm="6">
+
+				<MudTextField T="string"
+							  @bind-Value="@Code.vchCode"
+							  Label="Código"
+							  Lines="30"
+							  Variant="Variant.Outlined" />
+			</MudItem>
+
+			<MudItem sm="6">
+
+				<MudTextField T="string"
+							  Text="@Code.CodeAnalizedDetails.vchCodeImproved"
+							  Label="Código Analizado"
+							  Lines="30"
+							  Variant="Variant.Outlined" />
+			</MudItem>
+		</MudGrid>
+	</MudCardContent>
+	<MudCardActions>
+
+		<MudTextField T="string"
+					  Text="@Code.CodeAnalizedDetails.vchImprovements"
+					  Label="Mejoras y comentarios"
+					  Lines="10"
+					  ReadOnly="true"
+					  Variant="Variant.Outlined" />
+	</MudCardActions>
+
+</MudCard>
+
+@code{
+	[Parameter] public CodeAnalyze Code { get; set; }
+}

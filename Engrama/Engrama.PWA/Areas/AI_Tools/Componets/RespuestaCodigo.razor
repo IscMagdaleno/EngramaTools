@@ -1,0 +1,23 @@
+﻿@inherits EngramaComponent
+
+
+<MudGrid>
+	<MudItem sm="6">
+		<MudCard>
+			<MudCardContent>
+
+				<MudText Typo="Typo.body1" Style="white-space: pre-wrap;">@codeAfterAnalyzed.vchDescriptinos</MudText>
+				<MudText Typo="Typo.body1" Style="white-space: pre-wrap;">@codeAfterAnalyzed.vchImprovements</MudText>
+
+			</MudCardContent>
+		</MudCard>
+	</MudItem>
+
+	<MudItem sm="6">
+		<MudCard>
+			<MudCardContent>
+				<CodeBlock Language="Lenguaje" Code="@codeAfterAnalyzed.vchCodeImproved"></CodeBlock>
+			</MudCardContent>
+		</MudCard>
+	</MudItem>
+</MudGrid>

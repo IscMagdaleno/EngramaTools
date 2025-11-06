@@ -1,0 +1,27 @@
+﻿@using Engrama.PWA.Shared.Common
+@inherits EngramaComponent
+
+
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h6">@Code.CodeAnalizedDetails.vchTitle</MudText>
+		</CardHeaderContent>
+		<CardHeaderActions>
+			<MudIconButton Icon="@Icons.Material.Filled.OpenInFull"
+						   OnClick="OnShowCode"
+						   Variant="Variant.Filled"
+						   Color="Color.Success" />
+		</CardHeaderActions>
+	</MudCardHeader>
+	<MudCardContent>
+		<MudText Typo="Typo.body2">@Code.CodeAnalizedDetails.vchDescriptinos</MudText>
+	</MudCardContent>
+	<MudCardActions>
+		<MudButton Variant="Variant.Filled"
+		OnClick="OnClickAnalyzeAgain"
+				   Color="Color.Primary">
+			Volver Analizar
+		</MudButton>
+	</MudCardActions>
+</MudCard>

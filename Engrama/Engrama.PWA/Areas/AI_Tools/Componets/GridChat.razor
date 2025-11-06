@@ -1,0 +1,60 @@
+﻿@inherits EngramaComponent
+
+<MudItem sm="12">
+
+
+	<!-- Chat Messages -->
+	<div id="unique_id_scroll_section" class="ma-0" style="max-height:700px;overflow: auto;">
+		<MudPaper>
+			<MudCard>
+				<MudCardContent>
+
+
+					@foreach (var message in LstChatMessage)
+					{
+
+						<MudGrid>
+							@if (message.Role == "user")
+							{
+								<MudItem sm="1"></MudItem>
+								<MudItem sm="11">
+									<MudCard>
+										<MudCardContent>
+											<MudText Typo="Typo.body1" Style="white-space: pre-wrap;">@message.Content</MudText>
+										</MudCardContent>
+									</MudCard>
+								</MudItem>
+							}
+
+							@if (message.Role != "user")
+							{
+								<MudItem sm="11">
+									<MudCard>
+										<MudCardContent>
+											<RespuestaCodigo Lenguaje="Lenguaje" Message="@message"></RespuestaCodigo>
+										</MudCardContent>
+									</MudCard>
+								</MudItem>
+								<MudItem sm="1"></MudItem>
+							}
+						</MudGrid>
+
+					}
+				</MudCardContent>
+			</MudCard>
+		</MudPaper>
+
+	</div>
+
+	<!-- Input Area -->
+	<MudTextField @bind-Value="UserMessage"
+				  Placeholder="Describe lo que desea a crear..."
+				  Variant="Variant.Outlined"
+				  Lines="3"
+				  FullWidth="true"
+				  Adornment="Adornment.End"
+				  AdornmentIcon="@Icons.Material.Filled.Send"
+				  OnAdornmentClick="OnClickSendMessage"
+				  Immediate="true" />
+
+</MudItem>

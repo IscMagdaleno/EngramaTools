@@ -1,0 +1,20 @@
+﻿@using Engrama.PWA.Helpers;
+@using Engrama.PWA.Shared.Common
+
+@inherits EngramaPage
+@inject ILogginService LogginService
+@inject NavigationManager NavigationManager
+
+@page "/PageLogOut"
+
+@code {
+
+
+
+	protected override async Task OnInitializedAsync()
+	{
+		await LogginService.Logout();
+		NavigationManager.NavigateTo("");
+
+	}
+}

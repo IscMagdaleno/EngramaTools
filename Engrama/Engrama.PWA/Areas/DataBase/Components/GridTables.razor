@@ -1,0 +1,77 @@
+﻿@using Engrama.PWA.Shared.Common
+@inherits EngramaComponent
+
+
+<MudGrid>
+
+	<MudItem sm="@(bShowDetails? 6 : 12)">
+		<MudButton Variant="Variant.Filled"
+				   StartIcon="@Icons.Material.Filled.Downloading"
+				   OnClick="OnInitializedAsync"
+				   Color="Color.Success">
+			Recargar
+		</MudButton>
+
+		<ListTables LstTables="@Data.LstTables"
+					OnTablaSelected="OnTablaSelected" />
+	</MudItem>
+
+	@if (bShowDetails)
+	{
+		<MudItem sm="6">
+			<TableColumns Columns="@Data.TableSelected.Columns" />
+		</MudItem>
+
+
+		<MudItem sm="12">
+
+
+			<MudTabs Elevation="2"
+					 Rounded="true"
+					 Border="true"
+					 Position="Position.Top"
+					 Color="@Color.Info"
+					 ApplyEffectsToContainer="true"
+					 Class="mt-8"
+					 PanelClass="pa-6">
+
+				@foreach (var buildedCode in Data.TableSelected.BuildedCodes)
+				{
+					<MudTabPanel Text="@buildedCode.vchName">
+
+
+
+						<MudTabs Elevation="2"
+								 Rounded="true"
+								 Border="true"
+								 Position="Position.Top"
+								 Color="@Color.Info"
+								 ApplyEffectsToContainer="true"
+								 Class="mt-8"
+								 PanelClass="pa-6">
+
+							@foreach (var script in buildedCode.Scripts)
+							{
+								<MudTabPanel Text="@script.vchName">
+
+									<CodeBlock Code="@script.vchCode"
+											   Language="sql"
+											   Title="script.vchName">
+									</CodeBlock>
+
+								</MudTabPanel>
+							}
+
+
+						</MudTabs>
+
+
+					</MudTabPanel>
+				}
+
+
+			</MudTabs>
+
+		</MudItem>
+	}
+</MudGrid>

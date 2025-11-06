@@ -1,0 +1,33 @@
+﻿@using Engrama.PWA.Shared.Common
+@inherits EngramaComponent
+
+
+<MudDialog>
+	<TitleContent>
+		Details Script
+	</TitleContent>
+	<DialogContent>
+
+		<MudCard>
+			<MudCardHeader>
+				<CardHeaderContent>
+					<MudText Typo="Typo.body1">@Script.vchName</MudText>
+					<MudText Typo="Typo.body2">@Script.vchDescription</MudText>
+				</CardHeaderContent>
+			</MudCardHeader>
+			<MudCardContent>
+				<MudTextField @bind-Value="@Script.vchCode"
+							  Label="Código"
+							  Lines="30"
+							  Variant="Variant.Outlined" />
+			</MudCardContent>
+
+		</MudCard>
+	</DialogContent>
+	<DialogActions>
+		<MudButton Color="Color.Primary"
+				   OnClick="Submit">
+			Ok
+		</MudButton>
+	</DialogActions>
+</MudDialog>

@@ -1,0 +1,31 @@
+﻿@using Engrama.PWA.Shared.Common
+@using Engrama.Share.Objetos;
+@inherits EngramaComponent
+
+
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.body1">@Script.vchName</MudText>
+		</CardHeaderContent>
+		<CardHeaderActions>
+			<MudFab StartIcon="@Icons.Material.Filled.TableRows"
+					Color="Color.Secondary"
+					OnClick="@OnClickCommonScript"
+					Label="Code" />
+			@if (bEnableEdit)
+			{
+				<MudFab StartIcon="@Icons.Material.Filled.Edit"
+						Color="Color.Success"
+						OnClick="@OnClicEditSelected"
+						Label="Edit" />
+			}
+		</CardHeaderActions>
+	</MudCardHeader>
+	<MudCardContent>
+		<MudText Typo="Typo.body2">
+			@Script.vchDescription
+		</MudText>
+	</MudCardContent>
+</MudCard>
+

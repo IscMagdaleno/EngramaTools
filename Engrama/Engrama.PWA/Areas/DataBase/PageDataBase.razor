@@ -1,0 +1,82 @@
+﻿@using Engrama.PWA.Areas.DataBase.Components
+@using Engrama.PWA.Shared.Common
+@inherits EngramaPage
+@page "/PageDataBase"
+
+<PageTitle>Base de Datos</PageTitle>
+
+<MudCard>
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h6">Base de Datos</MudText>
+		</CardHeaderContent>
+		<CardHeaderActions>
+			@if (bConnectionStringTable.False())
+			{
+				<MudIconButton Icon="@Icons.Material.Filled.ArrowBack"
+							   OnClick="OnGoBackConeccionString"
+							   Color="Color.Error" />
+			}
+		</CardHeaderActions>
+	</MudCardHeader>
+	<MudCardContent>
+
+		<MudGrid>
+			@if (bConnectionStringTable)
+			{
+
+				<MudItem sm="12">
+
+					<MudCard>
+						<MudCardHeader>
+							<CardHeaderContent>
+								<MudText Typo="Typo.h6">Seleccione la Cadena de conexión para trabajar.</MudText>
+							</CardHeaderContent>
+						</MudCardHeader>
+						<MudCardContent>
+							<TableConnectios Data="@Data"
+											 bDataBaseModule="true"
+											 OnConnectionStringSelected="OnConnectionStringSelected" />
+						</MudCardContent>
+					</MudCard>
+
+				</MudItem>
+			}
+			else
+			{
+				<MudItem sm="12">
+					<MudTextField @bind-Value="Data.vchKeySerch"
+								  Label="Buscar ... "
+								  Variant="Variant.Outlined">
+					</MudTextField>
+					<MudButton Variant="Variant.Filled"
+							   OnClick="OnClickBuscar"
+							   Color="Color.Primary">
+						Buscar
+					</MudButton>
+
+				</MudItem>
+
+				<MudItem sm="12">
+					<MudExpansionPanels MultiExpansion="true">
+
+						<MudExpansionPanel Text="Tablas">
+							<GridTables Data="@Data"></GridTables>
+						</MudExpansionPanel>
+
+						<MudExpansionPanel Text="Procedimientos Almacenados">
+
+							<GridStoredProcedure Data="@Data"></GridStoredProcedure>
+						</MudExpansionPanel>
+
+					</MudExpansionPanels>
+
+				</MudItem>
+
+			}
+
+		</MudGrid>
+
+
+	</MudCardContent>
+</MudCard>

@@ -1,0 +1,48 @@
+﻿@using Engrama.PWA.Shared.Common
+@inherits EngramaComponent
+@using Engrama.Share.Objetos;
+@using Engrama.Share.Objetos.DataBaseArea;
+
+<MudGrid>
+
+	<MudItem sm="12">
+
+		<MudTable Items="@LstStoredProcedures"
+				  T="StoredProcedure"
+				  Dense="@true"
+				  Hover="true"
+				  OnRowClick="@OnStoredProcedure"
+				  RowsPerPage="10"
+				  Filter="new Func<StoredProcedure,bool>(FilterFunc1)">
+
+			<ToolBarContent>
+
+				<MudTextField @bind-Value="searchStringFilto"
+							  Placeholder="Search..."
+							  Adornment="Adornment.Start"
+							  AdornmentIcon="@Icons.Material.Filled.Search"
+							  IconSize="Size.Medium"
+							  Class="mt-0" />
+			</ToolBarContent>
+
+			<HeaderContent>
+				<MudTh>No</MudTh>
+				<MudTh>Name</MudTh>
+				<MudTh>Date</MudTh>
+			</HeaderContent>
+			<RowTemplate>
+				<MudTd DataLabel="idEjecutableQuery">@context.idStoredProcedure</MudTd>
+				<MudTd DataLabel="vchNombre">@context.vchName</MudTd>
+				<MudTd DataLabel="dtFechaCreacion">@context.dtCreationDate.ToString()</MudTd>
+			</RowTemplate>
+			<PagerContent>
+				<MudTablePager />
+			</PagerContent>
+		</MudTable>
+
+
+	</MudItem>
+
+
+</MudGrid>
+

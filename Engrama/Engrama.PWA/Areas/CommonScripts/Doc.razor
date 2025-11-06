@@ -1,0 +1,98 @@
+﻿@page "/documentation"
+@using Engrama.PWA.Areas.CommonScripts.Components
+
+<MudContainer MaxWidth="MaxWidth.Large">
+    <MudText Typo="Typo.h3" Class="mb-4">Documentación de Código</MudText>
+    
+    <MudText Typo="Typo.h5" Class="mb-3">Ejemplo de C#</MudText>
+    <CodeBlock Language="csharp" Code="@csharpCode" />
+    
+    <MudText Typo="Typo.h5" Class="mb-3 mt-4">Ejemplo de SQL</MudText>
+    <CodeBlock Language="sql" Code="@sqlCode" />
+    
+    <MudText Typo="Typo.h5" Class="mb-3 mt-4">Ejemplo de HTML</MudText>
+    <CodeBlock Language="html" Code="@htmlCode" />
+    
+    <MudText Typo="Typo.h5" Class="mb-3 mt-4">Ejemplo de Razor</MudText>
+    <CodeBlock Language="razor" Code="@razorCode" />
+</MudContainer>
+
+@code {
+    private string csharpCode = @"
+public class UserService
+{
+    private readonly IUserRepository _userRepository;
+    
+    public UserService(IUserRepository userRepository)
+    {
+        _userRepository = userRepository;
+    }
+    
+    public async Task<User> GetUserAsync(int id)
+    {
+        var user = await _userRepository.GetByIdAsync(id);
+        if (user == null)
+        {
+            throw new UserNotFoundException($""Usuario con ID {id} no encontrado"");
+        }
+        return user;
+    }
+}";
+
+    private string sqlCode = @"
+SELECT 
+    u.Id,
+    u.Name,
+    u.Email,
+    COUNT(o.Id) as OrderCount
+FROM Users u
+LEFT JOIN Orders o ON u.Id = o.UserId
+WHERE u.IsActive = 1
+    AND u.CreatedDate >= '2024-01-01'
+GROUP BY u.Id, u.Name, u.Email
+ORDER BY OrderCount DESC;";
+
+    private string htmlCode = @"
+<div class=""user-card"">
+    <img src=""avatar.jpg"" alt=""User Avatar"" class=""avatar"" />
+    <div class=""user-info"">
+        <h3 class=""user-name"">Juan Pérez</h3>
+        <p class=""user-email"">juan.perez@email.com</p>
+        <button class=""btn btn-primary"">Ver Perfil</button>
+    </div>
+</div>";
+
+    private string razorCode = @"
+@page ""/users/{id:int}""
+@using MyApp.Models
+@inject UserService UserService
+
+<MudContainer>
+    @if (user != null)
+    {
+        <MudCard>
+            <MudCardHeader>
+                <MudText Typo=""Typo.h5"">@user.Name</MudText>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudText>Email: @user.Email</MudText>
+                <MudText>Registrado: @user.CreatedDate.ToString(""dd/MM/yyyy"")</MudText>
+            </MudCardContent>
+        </MudCard>
+    }
+    else
+    {
+        <MudProgressCircular Indeterminate=""true"" />
+    }
+</MudContainer>
+
+@code {
+    [Parameter] public int Id { get; set; }
+    private User? user;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        user = await UserService.GetUserAsync(Id);
+    }
+}";
+}

@@ -1,0 +1,47 @@
+﻿@using Engrama.PWA.Shared.Common
+@inherits EngramaComponent
+<EditForm Model="@Data.ConnectionStringSelected"
+		  OnValidSubmit="OnValidSubmit">
+
+
+	<DataAnnotationsValidator />
+
+	<MudFocusTrap>
+		<MudCard>
+
+			<MudCardContent>
+				<MudGrid>
+
+					<MudItem sm="12" xs="12">
+						<MudTextField @bind-Value="@Data.ConnectionStringSelected.vchNota"
+									  Label="Nota"
+									  MaxLength="250"
+									  Variant="Variant.Outlined" />
+					</MudItem>
+					<MudItem sm="12" xs="12">
+						<MudTextField @bind-Value="@Data.ConnectionStringSelected.vchConnectionString"
+									  Label="ConnectionString"
+									  Lines="5"
+									  MaxLength="250"
+									  Variant="Variant.Outlined" />
+					</MudItem>
+					<MudItem sm="12" xs="12">
+
+						<MudSwitch @bind-Value="Data.ConnectionStringSelected.bActivo" Color="Color.Primary" />
+					</MudItem>
+
+
+				</MudGrid>
+			</MudCardContent>
+			<MudCardActions>
+				<MudButton Variant="Variant.Filled"
+						   Class="mr-2 ml-auto"
+						   ButtonType="ButtonType.Submit"
+						   Color="Color.Info">Save Connection</MudButton>
+
+			</MudCardActions>
+		</MudCard>
+	</MudFocusTrap>
+
+
+</EditForm>
