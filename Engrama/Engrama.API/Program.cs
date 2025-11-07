@@ -3,8 +3,10 @@
 
 using Engrama.API.EngramaLevels.Dominio.Core;
 using Engrama.API.EngramaLevels.Dominio.Interfaces;
+using Engrama.API.EngramaLevels.Dominio.Servicios;
 using Engrama.API.EngramaLevels.Infrastructure.Interfaces;
 using Engrama.API.EngramaLevels.Infrastructure.Repository;
+using Engrama.API.SemanticKernel.Agentes;
 
 using EngramaCoreStandar.Extensions;
 
@@ -36,8 +38,15 @@ builder.Services.AddScoped<ICommonScriptsRepository, CommonScriptsRepository>();
 
 
 builder.Services.AddEngramaDependenciesAPI();
-// MapperHelper como singleton porque maneja su propia configuración
 
+builder.Services.AddScoped<KernelProvider>();
+builder.Services.AddScoped(sp => sp.GetRequiredService<KernelProvider>().GetKernel());
+
+
+builder.Services.AddScoped<TramitesAgentes>();
+
+
+builder.Services.AddScoped<IAgentOrchestrationService, AgentOrchestrationService>();
 
 
 /*Swagger configuration*/
