@@ -1,6 +1,7 @@
 ﻿// Engrama.API/SemanticKernel/Agentes/TramitesAgentes.cs
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
+using Microsoft.SemanticKernel.Connectors.Google;
 
 using System.Text;
 
@@ -17,7 +18,6 @@ namespace Engrama.API.SemanticKernel.Agentes
 
 		private readonly PromptExecutionSettings _executionSettings;
 		// Asume que los archivos de documentación de la metodología están en esta ruta relativa.
-		private readonly string _basePath = AppDomain.CurrentDomain.BaseDirectory;
 
 		public TramitesAgentes(Kernel kernel, ILogger<TramitesAgentes> logger)
 		{
@@ -29,7 +29,19 @@ namespace Engrama.API.SemanticKernel.Agentes
 
 			// CAMBIO CLAVE 2: Usar la clase base sin configuración específica de OpenAI.
 			// Esto permite que el conector de Gemini maneje la llamada a funciones correctamente.
-			_executionSettings = new PromptExecutionSettings();
+			_executionSettings = new GeminiPromptExecutionSettings
+			{
+				// ToolCallBehavior está disponible en esta clase, pero usa los tipos de GeminiToolCallBehavior
+				// Nota: Es posible que necesite el using Microsoft.SemanticKernel.Connectors.Google; para GeminiToolCallBehavior también.
+				ToolCallBehavior = GeminiToolCallBehavior.AutoInvokeKernelFunctions,
+			};
+
+			// Si el error persiste, pruebe el método estático de la clase base:
+			//_executionSettings = new GeminiPromptExecutionSettings
+			//{
+			//	ToolCallBehavior = GeminiToolCallBehavior.EnableKernelFunctions,
+			//};
+
 
 			_logger.LogInformation("TramitesAgentes inicializado con el Kernel y el servicio de chat.");
 		}
@@ -68,23 +80,26 @@ namespace Engrama.API.SemanticKernel.Agentes
 		public string BuildSystemPrompt()
 		{
 			var sb = new StringBuilder();
-			sb.AppendLine("Eres un asistente experto llamado 'AgenteEngrama'. Tu propósito es ayudar al usuario a entender y desarrollar aplicaciones usando la 'Metodología Engrama'." +
-			" Tienes acceso a funciones para consultar la base de datos de la aplicación y a la documentación oficial de la metodología. " +
-			"Usa tus herramientas (plugins) siempre que el usuario pregunte por datos técnicos de la base de datos (tablas, SPs, etc.)." +
-			" Si el usuario pregunta sobre la metodología, usa tu contexto interno.");
 
-			sb.AppendLine("\n--- DOCUMENTACIÓN DE LA METODOLOGÍA ENGRAMA ---");
+			sb.AppendLine("Eres un asistente que me ayuda a consultar la base de datos");
 
-			// Leer y adjuntar el contenido de los archivos de documentación
-			// NOTA: Esta implementación asume que los archivos .md están en la raíz o en una ubicación accesible. 
-			// En un entorno de producción, la lectura de archivos debe ser robusta.
-			sb.AppendLine($"\n{ReadDocumentationFile("1- Base de Datos.md")}");
-			sb.AppendLine($"\n{ReadDocumentationFile("2- Stored Procedures.md")}");
-			sb.AppendLine($"\n{ReadDocumentationFile("3- Solucion base y proyecto Share.md")}");
-			sb.AppendLine($"\n{ReadDocumentationFile("4- API y Capra Infraestrucura.md")}");
-			sb.AppendLine($"\n{ReadDocumentationFile("5- Dominio.md")}");
-			sb.AppendLine($"\n{ReadDocumentationFile("6- Servicio.md")}");
-			sb.AppendLine($"\n{ReadDocumentationFile("7- Cliente.md")}");
+			//sb.AppendLine("Eres un asistente experto llamado 'AgenteEngrama'. Tu propósito es ayudar al usuario a entender y desarrollar aplicaciones usando la 'Metodología Engrama'." +
+			//" Tienes acceso a funciones para consultar la base de datos de la aplicación y a la documentación oficial de la metodología. " +
+			//"Usa tus herramientas (plugins) siempre que el usuario pregunte por datos técnicos de la base de datos (tablas, SPs, etc.)." +
+			//" Si el usuario pregunta sobre la metodología, usa tu contexto interno.");
+
+			//sb.AppendLine("\n--- DOCUMENTACIÓN DE LA METODOLOGÍA ENGRAMA ---");
+
+			//// Leer y adjuntar el contenido de los archivos de documentación
+			//// NOTA: Esta implementación asume que los archivos .md están en la raíz o en una ubicación accesible. 
+			//// En un entorno de producción, la lectura de archivos debe ser robusta.
+			//sb.AppendLine($"\n{ReadDocumentationFile("1- Base de Datos.md")}");
+			//sb.AppendLine($"\n{ReadDocumentationFile("2- Stored Procedures.md")}");
+			//sb.AppendLine($"\n{ReadDocumentationFile("3- Solucion base y proyecto Share.md")}");
+			//sb.AppendLine($"\n{ReadDocumentationFile("4- API y Capra Infraestrucura.md")}");
+			//sb.AppendLine($"\n{ReadDocumentationFile("5- Dominio.md")}");
+			//sb.AppendLine($"\n{ReadDocumentationFile("6- Servicio.md")}");
+			//sb.AppendLine($"\n{ReadDocumentationFile("7- Cliente.md")}");
 			sb.AppendLine("--- FIN DOCUMENTACIÓN ---");
 
 			return sb.ToString();

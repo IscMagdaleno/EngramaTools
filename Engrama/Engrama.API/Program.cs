@@ -25,6 +25,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Services.AddEngramaDependenciesAPI();
 
 builder.Services.AddScoped<IUsersDominio, UsersDominio>();
 builder.Services.AddScoped<IDataBaseDominio, DataBaseDominio>();
@@ -37,7 +38,6 @@ builder.Services.AddScoped<IDataBaseRepository, DataBaseRepository>();
 builder.Services.AddScoped<ICommonScriptsRepository, CommonScriptsRepository>();
 
 
-builder.Services.AddEngramaDependenciesAPI();
 
 builder.Services.AddScoped<KernelProvider>();
 builder.Services.AddScoped(sp => sp.GetRequiredService<KernelProvider>().GetKernel());
