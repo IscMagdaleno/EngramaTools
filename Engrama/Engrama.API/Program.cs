@@ -31,11 +31,12 @@ builder.Services.AddScoped<IDataBaseDominio, DataBaseDominio>();
 builder.Services.AddScoped<ICommonScriptsDominio, CommonScriptsDominio>();
 builder.Services.AddScoped<IAnalyzeCodeDominio, AnalyzeCodeDominio>();
 builder.Services.AddScoped<IAI_ToolsDominio, AI_ToolsDominio>();
+builder.Services.AddScoped<IWorkFlowDominio, WorkFlowDominio>();
 
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<IDataBaseRepository, DataBaseRepository>();
 builder.Services.AddScoped<ICommonScriptsRepository, CommonScriptsRepository>();
-
+builder.Services.AddScoped<IWorkFlowRepository, WorkFlowRepository>();
 
 builder.Services.AddEngramaDependenciesAPI();
 

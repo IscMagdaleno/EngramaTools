@@ -1,0 +1,54 @@
+﻿@using Engrama.Share.Objetos.AI_Tools
+@using MudBlazor
+@using static MudBlazor.Colors
+@inherits EngramaComponent
+
+<MudExpansionPanels MultiExpansion="true">
+	@if (Modules.NotEmpty())
+	{
+		@foreach (var module in Modules)
+		{
+			<MudExpansionPanel Text="@($"Módulo: {module.vchModuleName}")" IsExpanded="true"
+							         Style="@($"border-left: 5px solid {Blue.Default}")">
+				<MudText Typo="Typo.body2" Class="mb-3">Propósito: @module.vchModulePurpose</MudText>
+
+				<MudExpansionPanels MultiExpansion="true">
+					@foreach (var phase in module.lstPhase)
+					{
+						<MudExpansionPanel Text="@($"Fase: {phase.vchPhaseName}")"
+										                       IsExpanded="false"
+										                       Style="@($"border-left: 5px solid {Cyan.Default}")">
+							<MudText Typo="Typo.body2" Class="mb-3">Objetivo: @phase.vchPhaseObjective</MudText>
+
+							<MudList T="string" Dense="true">
+								@foreach (var step in phase.lstStep)
+								{
+									<MudListItem Icon="@Icons.Material.Filled.KeyboardArrowRight"
+												                        Disabled="step.bIsCompleted"
+												                        Class="@(step.bIsCompleted ? "mud-text-secondary" : "")">
+
+										<MudCheckBox T="bool" @bind-Checked="@step.bIsCompleted"
+													                          Color="Color.Success"
+													                          OnChange="@(() => OnStepCompletedChange(step, true))">
+											@step.vchStepDescription
+										</MudCheckBox>
+
+										<MudChip Color="@GetLayerColor(step.vchLayer)"  
+												                        Size="Size.Small"  
+												                        Class="ml-3">
+											@step.vchLayer
+										</MudChip>
+									</MudListItem>
+								}
+							</MudList>
+						</MudExpansionPanel>
+					}
+				</MudExpansionPanels>
+			</MudExpansionPanel>
+		}
+	}
+	else
+	{
+		<MudText Typo="Typo.body1">Ingrese una descripción para generar el plan de trabajo.</MudText>
+	}
+</MudExpansionPanels>

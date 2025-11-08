@@ -1,7 +1,7 @@
 ﻿using Engrama.API.EngramaLevels.Dominio.BusinessLogic;
 using Engrama.API.EngramaLevels.Dominio.Interfaces;
+using Engrama.API.EngramaLevels.Infrastructure.Entity.DataBase;
 using Engrama.API.EngramaLevels.Infrastructure.Interfaces;
-using Engrama.Share.Entity.DataBase;
 using Engrama.Share.Helpers;
 using Engrama.Share.Objetos.DataBaseArea;
 using Engrama.Share.PostClass;

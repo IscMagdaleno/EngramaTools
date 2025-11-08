@@ -1,6 +1,6 @@
 ﻿using EngramaCoreStandar.Dapper.Interfaces;
 
-namespace Engrama.Share.Entity
+namespace Engrama.API.EngramaLevels.Infrastructure.Entity
 {
 	public class spSaveUsers
 	{

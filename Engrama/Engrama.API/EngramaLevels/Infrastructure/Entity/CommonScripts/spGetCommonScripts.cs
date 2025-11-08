@@ -1,6 +1,6 @@
 ﻿using EngramaCoreStandar.Dapper.Interfaces;
 
-namespace Engrama.Share.Entity.CommonScripts
+namespace Engrama.API.EngramaLevels.Infrastructure.Entity.CommonScripts
 {
 	public class spGetCommonScripts
 	{

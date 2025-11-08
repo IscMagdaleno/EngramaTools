@@ -1,4 +1,4 @@
-﻿using Engrama.Share.Entity.DataBase;
+﻿using Engrama.API.EngramaLevels.Infrastructure.Entity.DataBase;
 using Engrama.Share.Objetos.DataBaseArea;
 
 using EngramaCoreStandar.Extensions;

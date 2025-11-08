@@ -1,6 +1,6 @@
-﻿using Engrama.Share.Entity;
-using Engrama.Share.Entity.CommonScripts;
-
+﻿
+using Engrama.API.EngramaLevels.Infrastructure.Entity;
+using Engrama.API.EngramaLevels.Infrastructure.Entity.CommonScripts;
 namespace Engrama.API.EngramaLevels.Infrastructure.Interfaces
 {
 	public interface ICommonScriptsRepository

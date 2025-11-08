@@ -1,6 +1,6 @@
 ﻿using Engrama.API.EngramaLevels.Dominio.Interfaces;
+using Engrama.API.EngramaLevels.Infrastructure.Entity;
 using Engrama.API.EngramaLevels.Infrastructure.Interfaces;
-using Engrama.Share.Entity;
 using Engrama.Share.Objetos;
 using Engrama.Share.PostClass;
 

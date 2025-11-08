@@ -1,6 +1,6 @@
 ﻿using EngramaCoreStandar.Dapper.Interfaces;
 
-namespace Engrama.Share.Entity.DataBase
+namespace Engrama.API.EngramaLevels.Infrastructure.Entity.DataBase
 {
 	public class sqGetAllStoredProcedures
 	{

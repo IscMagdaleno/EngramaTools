@@ -1,5 +1,5 @@
-﻿using Engrama.API.EngramaLevels.Infrastructure.Interfaces;
-using Engrama.Share.Entity.DataBase;
+﻿using Engrama.API.EngramaLevels.Infrastructure.Entity.DataBase;
+using Engrama.API.EngramaLevels.Infrastructure.Interfaces;
 
 using EngramaCoreStandar.Dapper;
 

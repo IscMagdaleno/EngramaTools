@@ -1,0 +1,52 @@
+﻿@inherits EngramaPage
+@page "/PageWorkPlanGenerator"
+
+<MudCardContent>
+    <MudGrid>
+        <MudItem xs="12">
+            <MudTextField @bind-Value="Data.WorkPlanDescription"
+                          Label="Describe el módulo o edita la descripción mejorada para la siguiente iteración"
+                          Lines="5"
+                          Variant="Variant.Outlined" />
+            <MudButton Color="Color.Primary"
+                       Variant="Variant.Filled"
+                       OnClick="OnClickGeneratePlan"
+                       Class="mt-3">
+                @if (Data.CurrentWorkPlan.iIdWorkPlan > 0)
+                {
+                    <MudText>Iterar y Mejorar Descripción (IA)</MudText>
+                }
+                else
+                {
+                    <MudText>Generar Descripción Inicial (IA)</MudText>
+                }
+            </MudButton>
+
+            @if (Data.CurrentWorkPlan.iIdWorkPlan > 0)
+            {
+                <MudButton Color="Color.Success"
+                           Variant="Variant.Filled"
+                           OnClick="OnClickSavePlan"
+                           Class="mt-3 ml-4">
+                    Confirmar y Guardar Descripción
+                </MudButton>
+            }
+        </MudItem>
+
+        @if (Data.CurrentWorkPlan.iIdWorkPlan > 0)
+        {
+            <MudItem xs="12" Class="mt-8">
+                <MudText Typo="Typo.h5" Class="mb-3">Plan Actual (ID: @Data.CurrentWorkPlan.iIdWorkPlan)</MudText>
+                <MudCard Outlined="true">
+                    <MudCardContent>
+                        <MudText Typo="Typo.subtitle1">**Descripción Inicial del Usuario:**</MudText>
+                        <MudText Typo="Typo.body2">@Data.CurrentWorkPlan.vchInitialDescription</MudText>
+                        <MudDivider Class="my-4" />
+                        <MudText Typo="Typo.subtitle1">**Descripción Mejorada por IA (Versión Anterior):**</MudText>
+                        <MudText Typo="Typo.body1">@Data.CurrentWorkPlan.vchImprovedDescription</MudText>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+        }
+    </MudGrid>
+</MudCardContent>

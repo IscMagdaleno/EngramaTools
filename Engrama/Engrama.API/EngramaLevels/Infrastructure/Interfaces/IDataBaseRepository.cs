@@ -1,4 +1,5 @@
-﻿using Engrama.Share.Entity.DataBase;
+﻿
+using Engrama.API.EngramaLevels.Infrastructure.Entity.DataBase;
 
 namespace Engrama.API.EngramaLevels.Infrastructure.Interfaces
 {
