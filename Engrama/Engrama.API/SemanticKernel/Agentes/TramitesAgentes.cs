@@ -83,23 +83,23 @@ namespace Engrama.API.SemanticKernel.Agentes
 
 			sb.AppendLine("Eres un asistente que me ayuda a consultar la base de datos");
 
-			//sb.AppendLine("Eres un asistente experto llamado 'AgenteEngrama'. Tu propósito es ayudar al usuario a entender y desarrollar aplicaciones usando la 'Metodología Engrama'." +
-			//" Tienes acceso a funciones para consultar la base de datos de la aplicación y a la documentación oficial de la metodología. " +
-			//"Usa tus herramientas (plugins) siempre que el usuario pregunte por datos técnicos de la base de datos (tablas, SPs, etc.)." +
-			//" Si el usuario pregunta sobre la metodología, usa tu contexto interno.");
+			sb.AppendLine("Eres un asistente experto llamado 'AgenteEngrama'. Tu propósito es ayudar al usuario a entender y desarrollar aplicaciones usando la 'Metodología Engrama'." +
+			" Tienes acceso a funciones para consultar la base de datos de la aplicación y a la documentación oficial de la metodología. " +
+			"Usa tus herramientas (plugins) siempre que el usuario pregunte por datos técnicos de la base de datos (tablas, SPs, etc.)." +
+			" Si el usuario pregunta sobre la metodología, usa tu contexto interno.");
 
-			//sb.AppendLine("\n--- DOCUMENTACIÓN DE LA METODOLOGÍA ENGRAMA ---");
+			sb.AppendLine("\n--- DOCUMENTACIÓN DE LA METODOLOGÍA ENGRAMA ---");
 
-			//// Leer y adjuntar el contenido de los archivos de documentación
-			//// NOTA: Esta implementación asume que los archivos .md están en la raíz o en una ubicación accesible. 
-			//// En un entorno de producción, la lectura de archivos debe ser robusta.
-			//sb.AppendLine($"\n{ReadDocumentationFile("1- Base de Datos.md")}");
-			//sb.AppendLine($"\n{ReadDocumentationFile("2- Stored Procedures.md")}");
-			//sb.AppendLine($"\n{ReadDocumentationFile("3- Solucion base y proyecto Share.md")}");
-			//sb.AppendLine($"\n{ReadDocumentationFile("4- API y Capra Infraestrucura.md")}");
-			//sb.AppendLine($"\n{ReadDocumentationFile("5- Dominio.md")}");
-			//sb.AppendLine($"\n{ReadDocumentationFile("6- Servicio.md")}");
-			//sb.AppendLine($"\n{ReadDocumentationFile("7- Cliente.md")}");
+			// Leer y adjuntar el contenido de los archivos de documentación
+			// NOTA: Esta implementación asume que los archivos .md están en la raíz o en una ubicación accesible. 
+			// En un entorno de producción, la lectura de archivos debe ser robusta.
+			sb.AppendLine($"\n{ReadDocumentationFile("1- Base de Datos.md")}");
+			sb.AppendLine($"\n{ReadDocumentationFile("2- Stored Procedures.md")}");
+			sb.AppendLine($"\n{ReadDocumentationFile("3- Solucion base y proyecto Share.md")}");
+			sb.AppendLine($"\n{ReadDocumentationFile("4- API y Capra Infraestrucura.md")}");
+			sb.AppendLine($"\n{ReadDocumentationFile("5- Dominio.md")}");
+			sb.AppendLine($"\n{ReadDocumentationFile("6- Servicio.md")}");
+			sb.AppendLine($"\n{ReadDocumentationFile("7- Cliente.md")}");
 			sb.AppendLine("--- FIN DOCUMENTACIÓN ---");
 
 			return sb.ToString();
